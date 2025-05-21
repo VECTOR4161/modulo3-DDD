@@ -1,16 +1,172 @@
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
-model Persona {
-  id        Int    @id @default(autoincrement())
-  nombres   String
-  apellidos String
+model cliente {
+  id         Int       @id @default(autoincrement())
+  id_persona Int?
+  fec_c      DateTime? @db.Timestamp(0)
+  fec_u      DateTime? @db.Timestamp(0)
+  borrado    Boolean?
+  persona    persona?  @relation(fields: [id_persona], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cliente_ibfk_1")
+
+  @@index([id_persona], map: "id_persona")
+}
+
+model detalle_lote {
+  id_lote       Int?
+  id            Int       @id
+  cantidad      Int?
+  fecha_compra  DateTime? @db.DateTime(0)
+  id_producto   Int?
+  fecha_acabado DateTime? @db.Date
+  lote          lote?     @relation(fields: [id_lote], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "detalle_lote_ibfk_1")
+  producto      producto? @relation(fields: [id_producto], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "detalle_lote_ibfk_2")
+
+  @@index([id_lote], map: "id_lote")
+  @@index([id_producto], map: "id_producto")
+}
+
+model detalle_venta {
+  id          Int       @id @default(autoincrement())
+  cantidad    Int?
+  id_producto Int?
+  id_venta    Int?
+  producto    producto? @relation(fields: [id_producto], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "detalle_venta_ibfk_1")
+  venta       venta?    @relation(fields: [id_venta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "detalle_venta_ibfk_2")
+
+  @@index([id_producto], map: "id_producto")
+  @@index([id_venta], map: "id_venta")
+}
+
+model entidades {
+  id           Int          @id @default(autoincrement())
+  id_proveedor Int?
+  nombre       String?      @db.VarChar(200)
+  nit          String?      @db.VarChar(20)
+  telefono     String?      @db.VarChar(20)
+  descripcion  String?      @db.Text
+  fec_c        DateTime?    @db.Timestamp(0)
+  fec_u        DateTime?    @db.Timestamp(0)
+  borrado      Boolean?
+  proveedores  proveedores? @relation(fields: [id_proveedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "entidades_ibfk_1")
+
+  @@index([id_proveedor], map: "id_proveedor")
+}
+
+model ingredientes_receta {
+  id        Int      @id
+  id_receta Int?
+  cantidad  Int?
+  id_insumo Int?
+  recetas   recetas? @relation(fields: [id_receta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredientes_receta_ibfk_1")
+  insumo    insumo?  @relation(fields: [id_insumo], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredientes_receta_ibfk_2")
+
+  @@index([id_insumo], map: "id_insumo")
+  @@index([id_receta], map: "id_receta")
+}
+
+model insumo {
+  id                  Int                   @id
+  nombre              String?               @db.VarChar(100)
+  precio              Float?
+  unidades            Int?
+  ingredientes_receta ingredientes_receta[]
+}
+
+model lote {
+  id           Int            @id
+  fecha_compra DateTime?      @db.DateTime(0)
+  id_proveedor Int?
+  detalle_lote detalle_lote[]
+  proveedores  proveedores?   @relation(fields: [id_proveedor], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "lote_ibfk_1")
+
+  @@index([id_proveedor], map: "id_proveedor")
+}
+
+model persona {
+  id          Int           @id @default(autoincrement())
+  nombre      String?       @db.VarChar(100)
+  apellidos   String?       @db.VarChar(100)
+  telefono    String?       @db.VarChar(20)
+  dni         String?       @db.VarChar(20)
+  fec_c       DateTime?     @db.Timestamp(0)
+  fec_u       DateTime?     @db.Timestamp(0)
+  borrado     Boolean?
+  cliente     cliente[]
+  proveedores proveedores[]
+  usuario     usuario[]
+}
+
+model producto {
+  id            Int             @id @default(autoincrement())
+  nombre        String?         @db.VarChar(100)
+  stock         Int?
+  precio        Float?
+  detalle_lote  detalle_lote[]
+  detalle_venta detalle_venta[]
+  recetas       recetas[]
+}
+
+model proveedores {
+  id         Int         @id @default(autoincrement())
+  id_persona Int?
+  fec_c      DateTime?   @db.Timestamp(0)
+  fec_u      DateTime?   @db.Timestamp(0)
+  borrado    Boolean?
+  entidades  entidades[]
+  lote       lote[]
+  persona    persona?    @relation(fields: [id_persona], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "proveedores_ibfk_1")
+
+  @@index([id_persona], map: "id_persona")
+}
+
+model recetas {
+  id                   Int                   @id
+  id_producto_obtenido Int?
+  ingredientes_receta  ingredientes_receta[]
+  producto             producto?             @relation(fields: [id_producto_obtenido], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recetas_ibfk_1")
+
+  @@index([id_producto_obtenido], map: "id_producto_obtenido")
+}
+
+model rol {
+  id      Int       @id @default(autoincrement())
+  nombre  String?   @db.VarChar(255)
+  fec_c   DateTime? @db.Timestamp(0)
+  fec_u   DateTime? @db.Timestamp(0)
+  borrado Boolean?
+  usuario usuario[]
+}
+
+model usuario {
+  id         Int       @id @default(autoincrement())
+  id_persona Int?
+  id_rol     Int?
+  contrasena String?   @db.VarChar(255)
+  fec_c      DateTime? @db.Timestamp(0)
+  fec_u      DateTime? @db.Timestamp(0)
+  borrado    Boolean?
+  persona    persona?  @relation(fields: [id_persona], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "usuario_ibfk_1")
+  rol        rol?      @relation(fields: [id_rol], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "usuario_ibfk_2")
+  venta      venta[]
+
+  @@index([id_persona], map: "id_persona")
+  @@index([id_rol], map: "id_rol")
+}
+
+model venta {
+  id            Int             @id @default(autoincrement())
+  fecha_venta   DateTime?       @db.DateTime(0)
+  id_usuario    Int?
+  detalle_venta detalle_venta[]
+  usuario       usuario?        @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "venta_ibfk_1")
+
+  @@index([id_usuario], map: "id_usuario")
 }
