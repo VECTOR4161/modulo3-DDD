@@ -36,11 +36,12 @@ export class ClienteCreadoDomainEvent extends DomainEvent{
         this.borrado = borrado
     }
 
-    toPrimitives() {
-        const {idPersona, borrado} = this;
+    toPrimitives(): ClienteCreadoDomainEventAttributes {
+        const {id, idPersona, borrado} = this;
         return {
-            idPersona: idPersona,
-            borrado: borrado
+            id,
+            idPersona,
+            borrado
         }
     }
 
