@@ -1,6 +1,7 @@
 import amqp from 'amqplib';
+import { CommandPublisher } from '../../Application';
 
-export class RabbitMQPublisher {
+export class RabbitMQPublisher implements CommandPublisher{
   private channel: amqp.Channel | null = null;
 
   async connect() {

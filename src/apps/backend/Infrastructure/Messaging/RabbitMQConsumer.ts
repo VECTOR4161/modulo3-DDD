@@ -1,6 +1,7 @@
 import amqp from 'amqplib';
+import { CommandSubscriber } from '../../Application';
 
-export class RabbitMQConsumer {
+export class RabbitMQConsumer implements CommandSubscriber{
   private channel: amqp.Channel | null = null;
 
   async connectAndConsume(queue: string, onMessage: (msg: any) => void) {

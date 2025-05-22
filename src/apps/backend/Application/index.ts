@@ -14,3 +14,7 @@ export * from './Commands/Persona/crearPersonaCommand'
 
 //! USE CASES
 export * from './UseCases/CrearPersona'
+
+//* MESSAGING 
+export * from './Interfaces/messaging/CommandPublisher'
+export * from './Interfaces/messaging/CommandSubscriber'
