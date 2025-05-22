@@ -8,11 +8,11 @@ export class PersonaRepositoryImpl implements PersonaRepository{
         private readonly PersonaDatasource: PersonaDatasource
     ){}
 
-    save(crearPersona: CreatePersonaDto): Promise<void> {
+    save(crearPersona: CreatePersonaDto): Promise<Persona> {
         return this.PersonaDatasource.save(crearPersona)
     }
-    update(actualizarPersona: UpdatePersonaDto): Promise<Persona> {
-        return this.PersonaDatasource.update(actualizarPersona)
+    update(id: number, actualizarPersona: UpdatePersonaDto): Promise<Persona> {
+        return this.PersonaDatasource.update(id, actualizarPersona)
     }
     getById(id: number): Promise<Persona> {
         return this.PersonaDatasource.getById(id)

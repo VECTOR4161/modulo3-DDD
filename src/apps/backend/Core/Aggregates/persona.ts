@@ -11,8 +11,10 @@ import {
     PersonaTelefono
 } from "..";
 
+
 //* LA CLASE EXTIENDE DE AGGREGATE ROOT
 export class Persona extends AggregateRoot{
+
     //* ATRIBUTOS DE LA CLASE PERSONA
     readonly id: PersonaId;
     readonly nombre: PersonaNombre;

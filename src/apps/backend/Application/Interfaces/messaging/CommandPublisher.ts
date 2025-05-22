@@ -1,4 +1,4 @@
-export interface CommandPublisher {
-  connect(): Promise<void>;
-  publish(queue: string, message: any): Promise<void>;
+export abstract class CommandPublisher {
+  abstract connect(): Promise<void>;
+  abstract publish(queue: string, message: any): Promise<void>;
 }

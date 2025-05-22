@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { PersonaDatasourceImplPrisma, PersonaRepositoryImpl } from "../../../Infrastructure"
+import { PersonaDatasourceImplPrisma, PersonaRepositoryImpl, RabbitMQPublisher } from "../../../Infrastructure"
 import { SavePersonaController } from "../.."
 
 
@@ -9,10 +9,13 @@ export class SavePersonaRoute{
 
         const router = Router()
 
+
+        const commandPublisher = new RabbitMQPublisher();
+
         //* IMPORTACIONES DE DATASOURCE Y REPOSITORIO IMPLEMENTADOS.
         const personaDatasource = new PersonaDatasourceImplPrisma()
         const personaRepository = new PersonaRepositoryImpl( personaDatasource )
-        const savePersonaController = new SavePersonaController( personaRepository )
+        const savePersonaController = new SavePersonaController( personaRepository, commandPublisher )
 
         //* RUTA PARA EL CONTROLADOR
         router.post('/save', savePersonaController.savePersona)

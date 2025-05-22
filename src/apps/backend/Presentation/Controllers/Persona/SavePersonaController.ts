@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { 
+    CommandPublisher,
     CrearPersona, 
     CreatePersonaDto, 
     PersonaRepository 
@@ -10,7 +11,8 @@ import { CustomError } from "../../../Config";
 //* CONTROLADOR ENCARGADO DE GESTIONAR UNA UNICA OPERACION
 export class SavePersonaController{
     constructor(
-        private readonly personaRepository: PersonaRepository
+        private readonly personaRepository: PersonaRepository,
+        private readonly commandPublisher: CommandPublisher
     ){}
 
     //* MANEJADOR DE ERRORES 
@@ -28,7 +30,7 @@ export class SavePersonaController{
         if( error ) res.status(502).json({error})
 
         // //* LLAMADA DEL CASO DE USO POR PARTE DEL CONTROLADOR
-        new CrearPersona( this.personaRepository )
+        new CrearPersona( this.personaRepository, this.commandPublisher )
             .execute(createPersonaDto!)
             .then( data => res.json({ data }))
             .catch( error => this.handleError(error, res))
