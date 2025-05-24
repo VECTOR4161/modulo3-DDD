@@ -36,7 +36,6 @@ export class PersonaCreadaDomainEvent extends DomainEvent{
         telefono,
         dni,
         borrado
-        
     }: {
         aggregateId: string,
         eventId?: string,
