@@ -15,10 +15,14 @@ export * from './Interfaces/messaging/CommandSubscriber'
 
 //* REPOSITORIES
 export * from './Interfaces/Repositories/PersonaRepository'
+export * from './Interfaces/Repositories/ClienteRepository'
+export * from './Interfaces/Repositories/UsuarioRepository'
 
 
 //* DATASOURCES
 export * from './Interfaces/Datasources/PersonaDatasource'
+export * from './Interfaces/Datasources/ClienteDatasource'
+export * from './Interfaces//Datasources/UsuarioDatasource'
 
 //* COMMANDS
 export * from './Commands/Persona/crearPersonaCommand'
