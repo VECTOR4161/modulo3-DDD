@@ -34,4 +34,16 @@ export * from './UseCases/Persona/ActualizarPersona'
 export * from './UseCases/Persona/ObtenerPersona'
 export * from './UseCases/Persona/ObtenerPersonas'
 export * from './UseCases/Persona/EliminarPersona'
+//? CLIENTE
+export * from './UseCases/Cliente/CrearCliente'
+export * from './UseCases/Cliente/ActualizarCliente'
+export * from './UseCases/Cliente/ObtenerCliente'
+export * from './UseCases/Cliente/ObtenerClientes'
+export * from './UseCases/Cliente/EliminarCliente'
+//? USUARIO
+export * from './UseCases/Usuario/CrearUsuario'
+export * from './UseCases/Usuario/Actualizarusuario'
+export * from './UseCases/Usuario/ObtenerUsuario'
+export * from './UseCases/Usuario/ObtenerUsuarios'
+export * from './UseCases/Usuario/EliminarUsuario'
 
