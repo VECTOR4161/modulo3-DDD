@@ -2,7 +2,7 @@
 
 export class UpdateClienteDto{
     private constructor(
-        public idPersona?: string,
+        public idPersona?: number,
         public borrado?: boolean,
     ){}
 

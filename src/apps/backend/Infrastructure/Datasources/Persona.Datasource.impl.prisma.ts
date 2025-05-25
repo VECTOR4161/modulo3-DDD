@@ -48,7 +48,7 @@ export class PersonaDatasourceImplPrisma implements PersonaDatasource {
         try {
             const prisma = PrismaAdapter.crearConexion()
             const personadb = await prisma.persona.create({
-                data: CreatePersonaDto
+                data: crearPersona
             })
             return this.procesarPersonaDB(personadb)
         } catch (error) {
