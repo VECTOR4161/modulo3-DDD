@@ -27,7 +27,7 @@ export class SavePersonaController{
 
         //* USO DEL DTO PARA VALIDAR LA ENTRADA DE DATOS AL SERVIDOR
         const [error, createPersonaDto] = CreatePersonaDto.create( req.body )
-        if( error ) res.status(502).json({error})
+        if( error ) return res.status(502).json({error})
 
         // //* LLAMADA DEL CASO DE USO POR PARTE DEL CONTROLADOR
         new CrearPersona( this.personaRepository, this.commandPublisher )
