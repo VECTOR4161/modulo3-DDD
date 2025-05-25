@@ -1,7 +1,8 @@
 //* CONTROLLERS
-export * from './Controllers/Persona/SavePersonaController'
+export * from './Controllers/Persona/PersonaController'
 
 //* ROUTES
+export * from './Routes/Persona/PersonaRoutes'
 export * from './routes'
 
 

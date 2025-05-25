@@ -1,14 +1,12 @@
 import { Router } from "express";
-import { SavePersonaRoute } from "./Routes/Persona/SavePersonaRoute";
+import { PersonaRoutes } from ".";
 
-//* MANEJADOR DE LAS RUTAS DE FORMA CENTRALIZADA
 export class AppRoutes{
     static get routes(): Router{
 
         const router = Router();
 
-        //* MANEJADOR DE LAS RUTAS DE PERSONA
-        router.use('/persona', SavePersonaRoute.routes);
+        router.use('/persona', PersonaRoutes.routes);
         
         return router;
     }
