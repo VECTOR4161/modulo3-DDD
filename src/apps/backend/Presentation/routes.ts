@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SavePersonaRoute } from "./Routes/Persona/SavePersonaRoute";
+import { SavePersonaRoute } from "./Routes/Persona/PersonaRoutes";
 
 //* MANEJADOR DE LAS RUTAS DE FORMA CENTRALIZADA
 export class AppRoutes{

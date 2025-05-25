@@ -1,9 +1,10 @@
 //* CONTROLLERS
-export * from './Controllers/Persona/SavePersonaController'
+export * from "./Controllers/Persona/PersonaController";
+//export * from './Controllers/Producto/ProductoController'
 
 //* ROUTES
-export * from './routes'
-
+export * from "./Routes/Persona/PersonaRoutes";
+//export * from './Routes/Producto/ProductoRoutes'
 
 //* SERVER
-export * from './server'
+export * from "./server";
