@@ -23,20 +23,18 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
       const productodb = await prisma.producto.create({
         data: {
           nombre: crearProducto.nombre,
-          descripcion: crearProducto.descripcion,
           precio: crearProducto.precio,
           stock: crearProducto.stock,
-          borrado: crearProducto.borrado,
         },
       });
 
       const producto = Producto.create(
         new ProductoId(productodb.id),
-        new ProductoNombre(productodb.nombre),
-        new ProductoDescripcion(productodb.descripcion),
-        new ProductoPrecio(Number(productodb.precio)),
-        new ProductoStock(productodb.stock),
-        new ProductoBorrado(productodb.borrado)
+        new ProductoNombre(productodb.nombre!),
+        new ProductoDescripcion(crearProducto.descripcion),
+        new ProductoPrecio(Number(productodb.precio!)),
+        new ProductoStock(productodb.stock!),
+        new ProductoBorrado(crearProducto.borrado)
       );
 
       return producto;
@@ -55,10 +53,21 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
     try {
       let productoFiltrado = filtradorDeObjetos.filtrarDto(actualizarProducto);
 
+      const dataToUpdate: any = {};
+      if (productoFiltrado.nombre !== undefined) {
+        dataToUpdate.nombre = productoFiltrado.nombre;
+      }
+      if (productoFiltrado.precio !== undefined) {
+        dataToUpdate.precio = productoFiltrado.precio;
+      }
+      if (productoFiltrado.stock !== undefined) {
+        dataToUpdate.stock = productoFiltrado.stock;
+      }
+
       const prisma = PrismaAdapter.crearConexion();
 
       const productodb = await prisma.producto.update({
-        data: productoFiltrado,
+        data: dataToUpdate,
         where: {
           id: id,
         },
@@ -66,11 +75,11 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
 
       const producto = Producto.create(
         new ProductoId(productodb.id),
-        new ProductoNombre(productodb.nombre),
-        new ProductoDescripcion(productodb.descripcion),
-        new ProductoPrecio(Number(productodb.precio)),
-        new ProductoStock(productodb.stock),
-        new ProductoBorrado(productodb.borrado)
+        new ProductoNombre(productodb.nombre!),
+        new ProductoDescripcion(actualizarProducto.descripcion ?? ""),
+        new ProductoPrecio(Number(productodb.precio!)),
+        new ProductoStock(productodb.stock!),
+        new ProductoBorrado(actualizarProducto.borrado ?? false)
       );
 
       return producto;
@@ -92,13 +101,17 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
         },
       });
 
+      if (!productodb) {
+        throw CustomError.notFound("El producto no existe");
+      }
+
       const producto = Producto.fromPrimitives({
         id: productodb.id,
-        nombre: productodb.nombre,
-        descripcion: productodb.descripcion,
-        precio: Number(productodb.precio),
-        stock: productodb.stock,
-        borrado: productodb.borrado,
+        nombre: productodb.nombre!,
+        descripcion: "",
+        precio: Number(productodb.precio!),
+        stock: productodb.stock!,
+        borrado: false,
       });
 
       return producto;
@@ -115,20 +128,19 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
       const prisma = PrismaAdapter.crearConexion();
 
       const productosdb = await prisma.producto.findMany({
-
         orderBy: {
           nombre: "asc",
         },
       });
 
-      const productos = productosdb.map((productodb:any) =>
+      const productos = productosdb.map((productodb) =>
         Producto.fromPrimitives({
           id: productodb.id,
-          nombre: productodb.nombre,
-          descripcion: productodb.descripcion,
-          precio: Number(productodb.precio),
-          stock: productodb.stock,
-          borrado: productodb.borrado,
+          nombre: productodb.nombre!,
+          descripcion: "",
+          precio: Number(productodb.precio!),
+          stock: productodb.stock!,
+          borrado: false,
         })
       );
 
@@ -145,9 +157,8 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
     try {
       const prisma = PrismaAdapter.crearConexion();
 
-      await prisma.producto.update({
+      await prisma.producto.delete({
         where: { id: id },
-        data: { borrado: true },
       });
     } catch (error) {
       if (error instanceof CustomError) {
@@ -164,7 +175,7 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
       const productosdb = await prisma.producto.findMany({
         where: {
           nombre: {
-            contains: nombre
+            contains: nombre,
           },
         },
         orderBy: {
@@ -172,14 +183,14 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
         },
       });
 
-      const productos = productosdb.map((productodb:any) =>
+      const productos = productosdb.map((productodb) =>
         Producto.fromPrimitives({
           id: productodb.id,
-          nombre: productodb.nombre,
-          descripcion: productodb.descripcion,
-          precio: Number(productodb.precio),
-          stock: productodb.stock,
-          borrado: productodb.borrado,
+          nombre: productodb.nombre!,
+          descripcion: "",
+          precio: Number(productodb.precio!),
+          stock: productodb.stock!,
+          borrado: false,
         })
       );
 
@@ -200,21 +211,21 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
         where: {
           stock: {
             gt: 0,
-          }
+          },
         },
         orderBy: {
           nombre: "asc",
         },
       });
 
-      const productos = productosdb.map((productodb:any) =>
+      const productos = productosdb.map((productodb) =>
         Producto.fromPrimitives({
           id: productodb.id,
-          nombre: productodb.nombre,
-          descripcion: productodb.descripcion,
-          precio: Number(productodb.precio),
-          stock: productodb.stock,
-          borrado: productodb.borrado,
+          nombre: productodb.nombre!,
+          descripcion: "",
+          precio: Number(productodb.precio!),
+          stock: productodb.stock!,
+          borrado: false,
         })
       );
 

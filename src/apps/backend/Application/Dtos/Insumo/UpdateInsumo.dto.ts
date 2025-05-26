@@ -2,12 +2,11 @@ export class UpdateInsumoDto {
   private constructor(
     public nombre?: string,
     public precio?: number,
-    public unidades?: number,
-    public idProveedor?: number
+    public unidades?: number
   ) {}
 
   static create(object: { [key: string]: any }): [string?, UpdateInsumoDto?] {
-    let { nombre, precio, unidades, idProveedor } = object;
+    let { nombre, precio, unidades } = object;
 
     if (nombre !== undefined) {
       if (typeof nombre !== "string")
@@ -33,16 +32,6 @@ export class UpdateInsumoDto {
         return ["Las unidades deben ser un número entero", undefined];
     }
 
-    if (idProveedor !== undefined) {
-      if (typeof idProveedor !== "number")
-        return ["El ID del proveedor debe ser numérico", undefined];
-      if (!Number.isInteger(idProveedor))
-        return ["El ID del proveedor debe ser un número entero", undefined];
-    }
-
-    return [
-      undefined,
-      new UpdateInsumoDto(nombre, precio, unidades, idProveedor),
-    ];
+    return [undefined, new UpdateInsumoDto(nombre, precio, unidades)];
   }
 }

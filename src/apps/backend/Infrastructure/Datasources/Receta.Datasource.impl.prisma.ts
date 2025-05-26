@@ -12,15 +12,21 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
     try {
       const prisma = PrismaAdapter.crearConexion();
 
+      const lastReceta = await prisma.recetas.findFirst({
+        orderBy: { id: "desc" },
+      });
+      const nextId = lastReceta ? lastReceta.id + 1 : 1;
+
       const recetadb = await prisma.recetas.create({
         data: {
+          id: nextId,
           id_producto_obtenido: crearReceta.id_producto_obtenido,
         },
       });
 
       const receta = Receta.create(
         new RecetaId(recetadb.id),
-        new RecetaIdProductoObtenido(recetadb.id_producto_obtenido)
+        new RecetaIdProductoObtenido(recetadb.id_producto_obtenido!)
       );
 
       return receta;
@@ -47,7 +53,7 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
 
       const receta = Receta.create(
         new RecetaId(recetadb.id),
-        new RecetaIdProductoObtenido(recetadb.id_producto_obtenido)
+        new RecetaIdProductoObtenido(recetadb.id_producto_obtenido!)
       );
 
       return receta;
@@ -75,7 +81,7 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
 
       const receta = Receta.fromPrimitives({
         id: recetadb.id,
-        id_producto_obtenido: recetadb.id_producto_obtenido,
+        id_producto_obtenido: recetadb.id_producto_obtenido!,
       });
 
       return receta;
@@ -97,10 +103,10 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
         },
       });
 
-      const recetas = recetasdb.map((recetadb:any) =>
+      const recetas = recetasdb.map((recetadb) =>
         Receta.fromPrimitives({
           id: recetadb.id,
-          id_producto_obtenido: recetadb.id_producto_obtenido,
+          id_producto_obtenido: recetadb.id_producto_obtenido!,
         })
       );
 
@@ -141,10 +147,10 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
         },
       });
 
-      const recetas = recetasdb.map((recetadb:any) =>
+      const recetas = recetasdb.map((recetadb) =>
         Receta.fromPrimitives({
           id: recetadb.id,
-          id_producto_obtenido: recetadb.id_producto_obtenido,
+          id_producto_obtenido: recetadb.id_producto_obtenido!,
         })
       );
 

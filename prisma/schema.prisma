@@ -20,7 +20,7 @@ model cliente {
 
 model detalle_lote {
   id_lote       Int?
-  id            Int       @id
+  id            Int       @id @default(autoincrement())
   cantidad      Int?
   fecha_compra  DateTime? @db.DateTime(0)
   id_producto   Int?
@@ -60,23 +60,21 @@ model entidades {
 }
 
 model ingredientes_receta {
-  id        Int      @id
+  id        Int      @id @default(autoincrement())
   id_receta Int?
   cantidad  Int?
   id_insumo Int?
   recetas   recetas? @relation(fields: [id_receta], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredientes_receta_ibfk_1")
-  insumo    insumo?  @relation(fields: [id_insumo], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ingredientes_receta_ibfk_2")
 
   @@index([id_insumo], map: "id_insumo")
-  @@index([id_receta], map: "id_receta")
+  @@index([id_receta], map: "ingredientes_receta_recetas_id_fk")
 }
 
 model insumo {
-  id                  Int                   @id
-  nombre              String?               @db.VarChar(100)
-  precio              Float?
-  unidades            Int?
-  ingredientes_receta ingredientes_receta[]
+  id       Int     @id
+  nombre   String? @db.VarChar(100)
+  precio   Float?
+  unidades Int?
 }
 
 model lote {
@@ -127,7 +125,7 @@ model proveedores {
 }
 
 model recetas {
-  id                   Int                   @id
+  id                   Int                   @id @default(autoincrement())
   id_producto_obtenido Int?
   ingredientes_receta  ingredientes_receta[]
   producto             producto?             @relation(fields: [id_producto_obtenido], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recetas_ibfk_1")

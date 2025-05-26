@@ -25,7 +25,8 @@ export class IngredientesRecetaDatasourceImplPrisma
 
       const ingredientesRecetadb = await prisma.ingredientes_receta.create({
         data: {
-          idReceta: crearIngredientesReceta.idReceta,
+          
+          id_receta: crearIngredientesReceta.idReceta,
           cantidad: crearIngredientesReceta.cantidad,
           id_insumo: crearIngredientesReceta.id_insumo,
         },
@@ -33,9 +34,9 @@ export class IngredientesRecetaDatasourceImplPrisma
 
       const ingredientesReceta = IngredientesReceta.create(
         new IngredientesRecetaId(ingredientesRecetadb.id),
-        new IngredientesRecetaIdReceta(ingredientesRecetadb.idReceta),
-        new IngredientesRecetaCantidad(ingredientesRecetadb.cantidad),
-        new IngredientesRecetaIdInsumo(ingredientesRecetadb.id_insumo)
+        new IngredientesRecetaIdReceta(ingredientesRecetadb.id_receta!),
+        new IngredientesRecetaCantidad(ingredientesRecetadb.cantidad!),
+        new IngredientesRecetaIdInsumo(ingredientesRecetadb.id_insumo!)
       );
 
       return ingredientesReceta;
@@ -58,10 +59,22 @@ export class IngredientesRecetaDatasourceImplPrisma
         actualizarIngredientesReceta
       );
 
+      // Mapear nombres de dominio a nombres de BD
+      const dataToUpdate: any = {};
+      if (ingredientesRecetaFiltrado.idReceta !== undefined) {
+        dataToUpdate.id_receta = ingredientesRecetaFiltrado.idReceta;
+      }
+      if (ingredientesRecetaFiltrado.cantidad !== undefined) {
+        dataToUpdate.cantidad = ingredientesRecetaFiltrado.cantidad;
+      }
+      if (ingredientesRecetaFiltrado.id_insumo !== undefined) {
+        dataToUpdate.id_insumo = ingredientesRecetaFiltrado.id_insumo;
+      }
+
       const prisma = PrismaAdapter.crearConexion();
 
       const ingredientesRecetadb = await prisma.ingredientes_receta.update({
-        data: ingredientesRecetaFiltrado,
+        data: dataToUpdate,
         where: {
           id: id,
         },
@@ -69,9 +82,9 @@ export class IngredientesRecetaDatasourceImplPrisma
 
       const ingredientesReceta = IngredientesReceta.create(
         new IngredientesRecetaId(ingredientesRecetadb.id),
-        new IngredientesRecetaIdReceta(ingredientesRecetadb.idReceta),
-        new IngredientesRecetaCantidad(ingredientesRecetadb.cantidad),
-        new IngredientesRecetaIdInsumo(ingredientesRecetadb.id_insumo)
+        new IngredientesRecetaIdReceta(ingredientesRecetadb.id_receta!),
+        new IngredientesRecetaCantidad(ingredientesRecetadb.cantidad!),
+        new IngredientesRecetaIdInsumo(ingredientesRecetadb.id_insumo!)
       );
 
       return ingredientesReceta;
@@ -95,11 +108,15 @@ export class IngredientesRecetaDatasourceImplPrisma
         },
       });
 
+      if (!ingredientesRecetadb) {
+        throw CustomError.notFound("El ingrediente de receta no existe");
+      }
+
       const ingredientesReceta = IngredientesReceta.fromPrimitives({
         id: ingredientesRecetadb.id,
-        idReceta: ingredientesRecetadb.idReceta,
-        cantidad: ingredientesRecetadb.cantidad,
-        id_insumo: ingredientesRecetadb.id_insumo,
+        idReceta: ingredientesRecetadb.id_receta!,
+        cantidad: ingredientesRecetadb.cantidad!,
+        id_insumo: ingredientesRecetadb.id_insumo!,
       });
 
       return ingredientesReceta;
@@ -117,17 +134,17 @@ export class IngredientesRecetaDatasourceImplPrisma
 
       const ingredientesRecetadb = await prisma.ingredientes_receta.findMany({
         orderBy: {
-          idReceta: "asc",
+          id_receta: "asc",
         },
       });
 
       const ingredientesReceta = ingredientesRecetadb.map(
-        (ingredientesRecetadb) =>
+        (ingredientesRecetaItem) =>
           IngredientesReceta.fromPrimitives({
-            id: ingredientesRecetadb.id,
-            idReceta: ingredientesRecetadb.idReceta,
-            cantidad: ingredientesRecetadb.cantidad,
-            id_insumo: ingredientesRecetadb.id_insumo,
+            id: ingredientesRecetaItem.id,
+            idReceta: ingredientesRecetaItem.id_receta!,
+            cantidad: ingredientesRecetaItem.cantidad!,
+            id_insumo: ingredientesRecetaItem.id_insumo!,
           })
       );
 
@@ -163,7 +180,7 @@ export class IngredientesRecetaDatasourceImplPrisma
 
       const ingredientesRecetadb = await prisma.ingredientes_receta.findMany({
         where: {
-          idReceta: idReceta,
+          id_receta: idReceta,
         },
         orderBy: {
           id: "asc",
@@ -171,12 +188,12 @@ export class IngredientesRecetaDatasourceImplPrisma
       });
 
       const ingredientesReceta = ingredientesRecetadb.map(
-        (ingredientesRecetadb:any) =>
+        (ingredientesRecetaItem) =>
           IngredientesReceta.fromPrimitives({
-            id: ingredientesRecetadb.id,
-            idReceta: ingredientesRecetadb.idReceta,
-            cantidad: ingredientesRecetadb.cantidad,
-            id_insumo: ingredientesRecetadb.id_insumo,
+            id: ingredientesRecetaItem.id,
+            idReceta: ingredientesRecetaItem.id_receta!,
+            cantidad: ingredientesRecetaItem.cantidad!,
+            id_insumo: ingredientesRecetaItem.id_insumo!,
           })
       );
 
@@ -198,17 +215,17 @@ export class IngredientesRecetaDatasourceImplPrisma
           id_insumo: id_insumo,
         },
         orderBy: {
-          idReceta: "asc",
+          id_receta: "asc",
         },
       });
 
       const ingredientesReceta = ingredientesRecetadb.map(
-        (ingredientesRecetadb:any) =>
+        (ingredientesRecetaItem) =>
           IngredientesReceta.fromPrimitives({
-            id: ingredientesRecetadb.id,
-            idReceta: ingredientesRecetadb.idReceta,
-            cantidad: ingredientesRecetadb.cantidad,
-            id_insumo: ingredientesRecetadb.id_insumo,
+            id: ingredientesRecetaItem.id,
+            idReceta: ingredientesRecetaItem.id_receta!,
+            cantidad: ingredientesRecetaItem.cantidad!,
+            id_insumo: ingredientesRecetaItem.id_insumo!,
           })
       );
 
@@ -227,22 +244,23 @@ export class IngredientesRecetaDatasourceImplPrisma
     try {
       const prisma = PrismaAdapter.crearConexion();
 
-      await prisma.$transaction(async (tx: any) => {
+      await prisma.$transaction(async (tx) => {
         const recetadb = await tx.recetas.create({
           data: {
+            
             id_producto_obtenido: createRecetaCompleta.id_producto_obtenido,
           },
         });
 
         const ingredientesData = createRecetaCompleta.ingredientes.map(
           (ingrediente) => ({
-            idReceta: recetadb.id,
+            id_receta: recetadb.id,
             cantidad: ingrediente.cantidad,
             id_insumo: ingrediente.id_insumo,
           })
         );
 
-        await tx.ingredientesReceta.createMany({
+        await tx.ingredientes_receta.createMany({
           data: ingredientesData,
         });
       });
@@ -259,7 +277,7 @@ export class IngredientesRecetaDatasourceImplPrisma
       const prisma = PrismaAdapter.crearConexion();
 
       await prisma.ingredientes_receta.deleteMany({
-        where: { idReceta: idReceta },
+        where: { id_receta: idReceta },
       });
     } catch (error) {
       if (error instanceof CustomError) {

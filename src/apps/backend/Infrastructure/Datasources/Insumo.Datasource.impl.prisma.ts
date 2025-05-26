@@ -10,7 +10,7 @@ import {
   InsumoId,
   InsumoNombre,
   InsumoPrecio,
-  InsumoUnidades
+  InsumoUnidades,
 } from "../../Core";
 
 export class InsumoDatasourceImplPrisma implements InsumoDatasource {
@@ -18,19 +18,25 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
     try {
       const prisma = PrismaAdapter.crearConexion();
 
+      const lastInsumo = await prisma.insumo.findFirst({
+        orderBy: { id: "desc" },
+      });
+      const nextId = lastInsumo ? lastInsumo.id + 1 : 1;
+
       const insumodb = await prisma.insumo.create({
         data: {
+          id: nextId,
           nombre: crearInsumo.nombre,
           precio: crearInsumo.precio,
-          unidades: crearInsumo.unidades
+          unidades: crearInsumo.unidades,
         },
       });
 
       const insumo = Insumo.create(
         new InsumoId(insumodb.id),
-        new InsumoNombre(insumodb.nombre),
-        new InsumoPrecio(Number(insumodb.precio)),
-        new InsumoUnidades(insumodb.unidades)
+        new InsumoNombre(insumodb.nombre!),
+        new InsumoPrecio(Number(insumodb.precio!)),
+        new InsumoUnidades(insumodb.unidades!)
       );
 
       return insumo;
@@ -57,9 +63,9 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
 
       const insumo = Insumo.create(
         new InsumoId(insumodb.id),
-        new InsumoNombre(insumodb.nombre),
-        new InsumoPrecio(Number(insumodb.precio)),
-        new InsumoUnidades(insumodb.unidades)
+        new InsumoNombre(insumodb.nombre!),
+        new InsumoPrecio(Number(insumodb.precio!)),
+        new InsumoUnidades(insumodb.unidades!)
       );
 
       return insumo;
@@ -87,10 +93,10 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
 
       const insumo = Insumo.fromPrimitives({
         id: insumodb.id,
-        nombre: insumodb.nombre,
-        precio: Number(insumodb.precio),
-        unidades: insumodb.unidades,
-        idProveedor: insumodb.idProveedor,
+        nombre: insumodb.nombre!,
+        precio: Number(insumodb.precio!),
+        unidades: insumodb.unidades!,
+        idProveedor: 1,
       });
 
       return insumo;
@@ -112,13 +118,13 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         },
       });
 
-      const insumos = insumosdb.map((insumodb:any) =>
+      const insumos = insumosdb.map((insumodb) =>
         Insumo.fromPrimitives({
           id: insumodb.id,
-          nombre: insumodb.nombre,
-          precio: Number(insumodb.precio),
-          unidades: insumodb.unidades,
-          idProveedor: insumodb.idProveedor,
+          nombre: insumodb.nombre!,
+          precio: Number(insumodb.precio!),
+          unidades: insumodb.unidades!,
+          idProveedor: 1,
         })
       );
 
@@ -153,7 +159,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
       const insumosdb = await prisma.insumo.findMany({
         where: {
           nombre: {
-            contains: nombre
+            contains: nombre,
           },
         },
         orderBy: {
@@ -161,13 +167,13 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         },
       });
 
-      const insumos = insumosdb.map((insumodb:any) =>
+      const insumos = insumosdb.map((insumodb) =>
         Insumo.fromPrimitives({
           id: insumodb.id,
-          nombre: insumodb.nombre,
-          precio: Number(insumodb.precio),
-          unidades: insumodb.unidades,
-          idProveedor: insumodb.idProveedor,
+          nombre: insumodb.nombre!,
+          precio: Number(insumodb.precio!),
+          unidades: insumodb.unidades!,
+          idProveedor: 1,
         })
       );
 
@@ -195,13 +201,13 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         },
       });
 
-      const insumos = insumosdb.map((insumodb:any) =>
+      const insumos = insumosdb.map((insumodb) =>
         Insumo.fromPrimitives({
           id: insumodb.id,
-          nombre: insumodb.nombre,
-          precio: Number(insumodb.precio),
-          unidades: insumodb.unidades,
-          idProveedor: insumodb.idProveedor,
+          nombre: insumodb.nombre!,
+          precio: Number(insumodb.precio!),
+          unidades: insumodb.unidades!,
+          idProveedor: 1,
         })
       );
 
@@ -213,5 +219,4 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
       throw CustomError.badRequest("Error al obtener insumos disponibles");
     }
   }
-
 }
