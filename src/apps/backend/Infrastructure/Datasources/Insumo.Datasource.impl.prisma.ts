@@ -10,8 +10,7 @@ import {
   InsumoId,
   InsumoNombre,
   InsumoPrecio,
-  InsumoUnidades,
-  InsumoIdProveedor,
+  InsumoUnidades
 } from "../../Core";
 
 export class InsumoDatasourceImplPrisma implements InsumoDatasource {
@@ -23,8 +22,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         data: {
           nombre: crearInsumo.nombre,
           precio: crearInsumo.precio,
-          unidades: crearInsumo.unidades,
-          idProveedor: crearInsumo.idProveedor,
+          unidades: crearInsumo.unidades
         },
       });
 
@@ -32,8 +30,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         new InsumoId(insumodb.id),
         new InsumoNombre(insumodb.nombre),
         new InsumoPrecio(Number(insumodb.precio)),
-        new InsumoUnidades(insumodb.unidades),
-        new InsumoIdProveedor(insumodb.idProveedor)
+        new InsumoUnidades(insumodb.unidades)
       );
 
       return insumo;
@@ -62,8 +59,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         new InsumoId(insumodb.id),
         new InsumoNombre(insumodb.nombre),
         new InsumoPrecio(Number(insumodb.precio)),
-        new InsumoUnidades(insumodb.unidades),
-        new InsumoIdProveedor(insumodb.idProveedor)
+        new InsumoUnidades(insumodb.unidades)
       );
 
       return insumo;
@@ -116,7 +112,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         },
       });
 
-      const insumos = insumosdb.map((insumodb: any) =>
+      const insumos = insumosdb.map((insumodb:any) =>
         Insumo.fromPrimitives({
           id: insumodb.id,
           nombre: insumodb.nombre,
@@ -166,7 +162,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         },
       });
 
-      const insumos = insumosdb.map((insumodb: any) =>
+      const insumos = insumosdb.map((insumodb:any) =>
         Insumo.fromPrimitives({
           id: insumodb.id,
           nombre: insumodb.nombre,
@@ -200,7 +196,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         },
       });
 
-      const insumos = insumosdb.map((insumodb: any) =>
+      const insumos = insumosdb.map((insumodb:any) =>
         Insumo.fromPrimitives({
           id: insumodb.id,
           nombre: insumodb.nombre,
@@ -232,7 +228,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
         },
       });
 
-      const insumos = insumosdb.map((insumodb: any) =>
+      const insumos = insumosdb.map((insumodb:any) =>
         Insumo.fromPrimitives({
           id: insumodb.id,
           nombre: insumodb.nombre,

@@ -5,7 +5,6 @@ type InsumoCreadoDomainEventAttributes = {
   readonly nombre: string;
   readonly precio: number;
   readonly unidades: number;
-  readonly idProveedor: number;
 };
 
 export class InsumoCreadoDomainEvent extends DomainEvent {
@@ -15,7 +14,6 @@ export class InsumoCreadoDomainEvent extends DomainEvent {
   readonly nombre: string;
   readonly precio: number;
   readonly unidades: number;
-  readonly idProveedor: number;
 
   constructor({
     aggregateId,
@@ -24,8 +22,7 @@ export class InsumoCreadoDomainEvent extends DomainEvent {
     id,
     nombre,
     precio,
-    unidades,
-    idProveedor,
+    unidades
   }: {
     aggregateId: string;
     eventId?: string;
@@ -34,7 +31,6 @@ export class InsumoCreadoDomainEvent extends DomainEvent {
     nombre: string;
     precio: number;
     unidades: number;
-    idProveedor: number;
   }) {
     super({
       eventName: InsumoCreadoDomainEvent.EVENT_NAME,
@@ -46,17 +42,15 @@ export class InsumoCreadoDomainEvent extends DomainEvent {
     this.nombre = nombre;
     this.precio = precio;
     this.unidades = unidades;
-    this.idProveedor = idProveedor;
   }
 
   toPrimitives(): InsumoCreadoDomainEventAttributes {
-    const { id, nombre, precio, unidades, idProveedor } = this;
+    const { id, nombre, precio, unidades } = this;
     return {
       id,
       nombre,
       precio,
-      unidades,
-      idProveedor,
+      unidades
     };
   }
 
@@ -74,8 +68,7 @@ export class InsumoCreadoDomainEvent extends DomainEvent {
       id: attributes.id,
       nombre: attributes.nombre,
       precio: attributes.precio,
-      unidades: attributes.unidades,
-      idProveedor: attributes.idProveedor,
+      unidades: attributes.unidades
     });
   }
 }

@@ -20,6 +20,15 @@ export * from './Dtos/Producto/UpdateProducto.dto'
 export * from './Dtos/Insumo/CreateInsumo.dt'
 export * from './Dtos/Insumo/UpdateInsumo.dto'
 
+//* RECETA
+export * from './Dtos/Receta/CreateReceta.dto'
+export * from './Dtos/Receta/UpdateReceta.dto'
+
+//? INGREDIENTES RECETA
+export * from './Dtos/IngredientesReceta/CreateIngredientesReceta.dto'
+export * from './Dtos/IngredientesReceta/UpdateIngredientesReceta.dto'
+export * from './Dtos/IngredientesReceta/CreateRecetaCompleta.dto'
+
 //* MESSAGING 
 export * from './Interfaces/messaging/CommandPublisher'
 export * from './Interfaces/messaging/CommandSubscriber'
@@ -28,10 +37,10 @@ export * from './Interfaces/messaging/CommandSubscriber'
 export * from './Interfaces/Repositories/PersonaRepository'
 export * from './Interfaces/Repositories/ClienteRepository'
 export * from './Interfaces/Repositories/UsuarioRepository'
-export * from './Interfaces/Repositories/ProductoRepository'
-
-//? INSUMO
 export * from './Interfaces/Repositories/InsumoRepository'
+export * from './Interfaces/Repositories/ProductoRepository'
+export * from './Interfaces/Repositories/RecetaRepository'
+export * from './Interfaces/Repositories/IngredientesRecetaRepository'
 
 //* DATASOURCES
 export * from './Interfaces/Datasources/PersonaDatasource'
@@ -39,6 +48,8 @@ export * from './Interfaces/Datasources/ClienteDatasource'
 export * from './Interfaces//Datasources/UsuarioDatasource'
 export * from './Interfaces/Datasources/ProductoDatasource'
 export * from './Interfaces/Datasources/InsumoDatasource'
+export * from './Interfaces/Datasources/RecetaDatasource'
+export * from './Interfaces/Datasources/IngredientesRecetaDatasource'
 
 //* CASOS DE USO
 //? PERSONA
@@ -78,3 +89,19 @@ export * from './UseCases/Insumo/ObtenerInsumos'
 export * from './UseCases/Insumo/ObtenerInsumosDisponibles'
 export * from './UseCases/Insumo/ObtenerInsumosPorProveedor'
 export * from './UseCases/Insumo/EliminarInsumo'
+
+//? RECETA
+export * from './UseCases/Receta/CrearReceta'
+export * from './UseCases/Receta/ActualizarReceta'
+export * from './UseCases/Receta/ObtenerReceta'
+export * from './UseCases/Receta/ObtenerRecetas'
+export * from './UseCases/Receta/ObtenerRecetasPorProducto'
+export * from './UseCases/Receta/EliminarReceta'
+
+//? INGREDIENTES RECETA
+export * from './UseCases/IngredientesReceta/ObtenerIngredientesReceta'
+export * from './UseCases/IngredientesReceta/CrearIngredientesReceta'
+export * from './UseCases/IngredientesReceta/CrearRecetaCompleta'
+export * from './UseCases/IngredientesReceta/ActualizarIngredientesReceta'
+export * from './UseCases/IngredientesReceta/ObtenerIngredientesPorReceta'  
+export * from './UseCases/IngredientesReceta/EliminarIngredientesReceta'

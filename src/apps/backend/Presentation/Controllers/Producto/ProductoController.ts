@@ -95,10 +95,6 @@ export class ProductoController {
 
   deleteProducto = async (req: Request, res: Response): Promise<void> => {
     const id = Number(req.params.id);
-    if (isNaN(id)) {
-      res.status(400).json({ error: "ID de producto inválido" });
-      return;
-    }
 
     new EliminarProducto(this.productoRepository)
       .execute(id)

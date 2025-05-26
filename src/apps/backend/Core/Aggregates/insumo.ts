@@ -4,7 +4,6 @@ import {
     InsumoNombre,
     InsumoPrecio,
     InsumoUnidades,
-    InsumoIdProveedor,
     InsumoCreadoDomainEvent
 } from "..";
 
@@ -13,31 +12,27 @@ export class Insumo extends AggregateRoot {
     readonly nombre: InsumoNombre;
     readonly precio: InsumoPrecio;
     readonly unidades: InsumoUnidades;
-    readonly idProveedor: InsumoIdProveedor;
 
     constructor(
         id: InsumoId,
         nombre: InsumoNombre,
         precio: InsumoPrecio,
-        unidades: InsumoUnidades,
-        idProveedor: InsumoIdProveedor
+        unidades: InsumoUnidades
     ) {
         super();
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.unidades = unidades;
-        this.idProveedor = idProveedor;
     }
 
     static create(
         id: InsumoId,
         nombre: InsumoNombre,
         precio: InsumoPrecio,
-        unidades: InsumoUnidades,
-        idProveedor: InsumoIdProveedor
+        unidades: InsumoUnidades
     ): Insumo {
-        const insumo = new Insumo(id, nombre, precio, unidades, idProveedor);
+        const insumo = new Insumo(id, nombre, precio, unidades);
 
         insumo.record(
             new InsumoCreadoDomainEvent({
@@ -45,8 +40,7 @@ export class Insumo extends AggregateRoot {
                 id: insumo.id.value,
                 nombre: insumo.nombre.value,
                 precio: insumo.precio.value,
-                unidades: insumo.unidades.value,
-                idProveedor: insumo.idProveedor.value
+                unidades: insumo.unidades.value
             })
         );
 
@@ -65,7 +59,6 @@ export class Insumo extends AggregateRoot {
             new InsumoNombre(plainData.nombre),
             new InsumoPrecio(plainData.precio),
             new InsumoUnidades(plainData.unidades),
-            new InsumoIdProveedor(plainData.idProveedor)
         );
     }
 
@@ -74,8 +67,7 @@ export class Insumo extends AggregateRoot {
             id: this.id.value,
             nombre: this.nombre.value,
             precio: this.precio.value,
-            unidades: this.unidades.value,
-            idProveedor: this.idProveedor.value
+            unidades: this.unidades.value
         };
     }
 

@@ -37,7 +37,17 @@ export * from './ValueObjects/Insumo/InsumoId'
 export * from './ValueObjects/Insumo/InsumoNombre'
 export * from './ValueObjects/Insumo/InsumoPrecio'
 export * from './ValueObjects/Insumo/InsumoUnidades'
-export * from './ValueObjects/Insumo/InsumoIdProveedor'
+
+//? RECETA
+export * from './ValueObjects/Receta/RecetaId'
+export * from './ValueObjects/Receta/RecetaIdProductoObtenido'
+
+//? INGREDIENTES RECETA
+export * from './ValueObjects/IngredientesReceta/IngredientesRecetaId'
+export * from './ValueObjects/IngredientesReceta/IngredientesRecetaIdReceta'
+export * from './ValueObjects/IngredientesReceta/IngredientesRecetaCantidad'
+export * from './ValueObjects/IngredientesReceta/IngredientesRecetaIdInsumo'
+
 
 //* EVENTS
 //? PERSONA
@@ -48,6 +58,11 @@ export * from './Events/Cliente/clienteCreated'
 export * from './Events/Producto/productoCreated'
 //? INSUMO
 export * from './Events/Insumo/insumoCreated'
+//? RECETA
+export * from './Events/Receta/recetaCreated'
+//? INGREDIENTES RECETA
+export * from './Events/IngredientesReceta/ingredientesRecetaCreated'
+
 
 //* AGREGADOS
 export * from './Aggregates/persona'
@@ -55,3 +70,5 @@ export * from './Aggregates/cliente'
 export * from './Aggregates/usuario'
 export * from './Aggregates/producto'
 export * from './Aggregates/insumo'
+export * from './Aggregates/receta'
+export * from './Aggregates/ingredientesReceta'
