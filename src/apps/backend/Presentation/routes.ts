@@ -10,6 +10,13 @@ export class AppRoutes {
 
     router.use("/producto", ProductoRoutes.routes);
 
+    router.use("/receta", PersonaRoutes.routes);
+
+    router.use("/ingredientes-receta", PersonaRoutes.routes);
+
+    router.use("/insumo", PersonaRoutes.routes);
+    
+
     return router;
   }
 }

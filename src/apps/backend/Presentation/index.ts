@@ -9,6 +9,7 @@ export * from "./Routes/Persona/PersonaRoutes";
 export * from './Routes/Producto/ProductoRoutes'
 export * from "./Routes/Receta/RecetaRoutes";
 export * from "./Routes/IngredientesReceta/IngredientesRecetaRoutes";
+export * from './routes'
 
 //* SERVER
 export * from "./server";

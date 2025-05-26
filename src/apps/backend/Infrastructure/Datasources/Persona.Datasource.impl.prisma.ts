@@ -10,7 +10,7 @@ export class PersonaDatasourceImplPrisma implements PersonaDatasource {
             const personadb = prisma.persona.create({
                 data: CreatePersonaDto
             })
-            const persona = Persona.create(
+            const persona = await Persona.create(
                 new PersonaId(personadb.id),
                 new PersonaNombre(personadb.nombre),
                 new PersonaApellidos(personadb.apellidos),

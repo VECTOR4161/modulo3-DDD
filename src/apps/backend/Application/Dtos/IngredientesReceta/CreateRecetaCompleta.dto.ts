@@ -1,7 +1,7 @@
 export class CreateRecetaCompletaDto {
   private constructor(
     public id_producto_obtenido: number,
-    public ingredientes: Array<{ idInsumo: number; cantidad: number }>
+    public ingredientes: Array<{ id_insumo: number; cantidad: number }>
   ) {}
 
   static create(object: {
@@ -21,11 +21,11 @@ export class CreateRecetaCompletaDto {
 
     for (let i = 0; i < ingredientes.length; i++) {
       const ingrediente = ingredientes[i];
-      if (!ingrediente.idInsumo)
+      if (!ingrediente.id_insumo)
         return [`El ingrediente ${i + 1} debe tener idInsumo`, undefined];
       if (ingrediente.cantidad === undefined || ingrediente.cantidad === null)
         return [`El ingrediente ${i + 1} debe tener cantidad`, undefined];
-      if (!Number.isInteger(ingrediente.idInsumo))
+      if (!Number.isInteger(ingrediente.id_insumo))
         return [
           `El idInsumo del ingrediente ${i + 1} debe ser un número entero`,
           undefined,

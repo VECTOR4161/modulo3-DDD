@@ -12,5 +12,4 @@ export abstract class InsumoRepository {
   abstract deleteById(id: number): Promise<void>;
   abstract findByNombre(nombre: string): Promise<Array<Insumo>>;
   abstract findAvailable(): Promise<Array<Insumo>>;
-  abstract findByProveedor(idProveedor: number): Promise<Array<Insumo>>;
 }

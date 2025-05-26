@@ -8,7 +8,6 @@ import {
   ObtenerInsumo,
   ObtenerInsumos,
   ObtenerInsumosDisponibles,
-  ObtenerInsumosPorProveedor,
   InsumoRepository,
   UpdateInsumoDto,
 } from "../../../Application";
@@ -84,23 +83,6 @@ export class InsumoController {
   ): Promise<void> => {
     new ObtenerInsumosDisponibles(this.insumoRepository)
       .execute()
-      .then((data) =>
-        res.json({
-          data: data.map((insumo) => insumo.toPrimitives()),
-          count: data.length,
-        })
-      )
-      .catch((error) => this.handleError(error, res));
-  };
-
-  getInsumosPorProveedor = async (
-    req: Request,
-    res: Response
-  ): Promise<void> => {
-    const idProveedor = Number(req.params.idProveedor);
-
-    new ObtenerInsumosPorProveedor(this.insumoRepository)
-      .execute(idProveedor)
       .then((data) =>
         res.json({
           data: data.map((insumo) => insumo.toPrimitives()),

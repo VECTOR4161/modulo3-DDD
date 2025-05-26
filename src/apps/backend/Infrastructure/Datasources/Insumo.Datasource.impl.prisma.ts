@@ -153,8 +153,7 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
       const insumosdb = await prisma.insumo.findMany({
         where: {
           nombre: {
-            contains: nombre,
-            mode: "insensitive",
+            contains: nombre
           },
         },
         orderBy: {
@@ -215,35 +214,4 @@ export class InsumoDatasourceImplPrisma implements InsumoDatasource {
     }
   }
 
-  async findByProveedor(idProveedor: number): Promise<Array<Insumo>> {
-    try {
-      const prisma = PrismaAdapter.crearConexion();
-
-      const insumosdb = await prisma.insumo.findMany({
-        where: {
-          idProveedor: idProveedor,
-        },
-        orderBy: {
-          nombre: "asc",
-        },
-      });
-
-      const insumos = insumosdb.map((insumodb:any) =>
-        Insumo.fromPrimitives({
-          id: insumodb.id,
-          nombre: insumodb.nombre,
-          precio: Number(insumodb.precio),
-          unidades: insumodb.unidades,
-          idProveedor: insumodb.idProveedor,
-        })
-      );
-
-      return insumos;
-    } catch (error) {
-      if (error instanceof CustomError) {
-        throw CustomError.customizableError(error.statusCode, error.message);
-      }
-      throw CustomError.badRequest("Error al obtener insumos por proveedor");
-    }
-  }
 }

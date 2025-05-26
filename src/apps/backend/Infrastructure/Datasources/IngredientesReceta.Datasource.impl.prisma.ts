@@ -27,7 +27,7 @@ export class IngredientesRecetaDatasourceImplPrisma
         data: {
           idReceta: crearIngredientesReceta.idReceta,
           cantidad: crearIngredientesReceta.cantidad,
-          idInsumo: crearIngredientesReceta.idInsumo,
+          id_insumo: crearIngredientesReceta.id_insumo,
         },
       });
 
@@ -35,7 +35,7 @@ export class IngredientesRecetaDatasourceImplPrisma
         new IngredientesRecetaId(ingredientesRecetadb.id),
         new IngredientesRecetaIdReceta(ingredientesRecetadb.idReceta),
         new IngredientesRecetaCantidad(ingredientesRecetadb.cantidad),
-        new IngredientesRecetaIdInsumo(ingredientesRecetadb.idInsumo)
+        new IngredientesRecetaIdInsumo(ingredientesRecetadb.id_insumo)
       );
 
       return ingredientesReceta;
@@ -71,7 +71,7 @@ export class IngredientesRecetaDatasourceImplPrisma
         new IngredientesRecetaId(ingredientesRecetadb.id),
         new IngredientesRecetaIdReceta(ingredientesRecetadb.idReceta),
         new IngredientesRecetaCantidad(ingredientesRecetadb.cantidad),
-        new IngredientesRecetaIdInsumo(ingredientesRecetadb.idInsumo)
+        new IngredientesRecetaIdInsumo(ingredientesRecetadb.id_insumo)
       );
 
       return ingredientesReceta;
@@ -99,7 +99,7 @@ export class IngredientesRecetaDatasourceImplPrisma
         id: ingredientesRecetadb.id,
         idReceta: ingredientesRecetadb.idReceta,
         cantidad: ingredientesRecetadb.cantidad,
-        idInsumo: ingredientesRecetadb.idInsumo,
+        id_insumo: ingredientesRecetadb.id_insumo,
       });
 
       return ingredientesReceta;
@@ -127,7 +127,7 @@ export class IngredientesRecetaDatasourceImplPrisma
             id: ingredientesRecetadb.id,
             idReceta: ingredientesRecetadb.idReceta,
             cantidad: ingredientesRecetadb.cantidad,
-            idInsumo: ingredientesRecetadb.idInsumo,
+            id_insumo: ingredientesRecetadb.id_insumo,
           })
       );
 
@@ -176,7 +176,7 @@ export class IngredientesRecetaDatasourceImplPrisma
             id: ingredientesRecetadb.id,
             idReceta: ingredientesRecetadb.idReceta,
             cantidad: ingredientesRecetadb.cantidad,
-            idInsumo: ingredientesRecetadb.idInsumo,
+            id_insumo: ingredientesRecetadb.id_insumo,
           })
       );
 
@@ -189,13 +189,13 @@ export class IngredientesRecetaDatasourceImplPrisma
     }
   }
 
-  async findByInsumo(idInsumo: number): Promise<Array<IngredientesReceta>> {
+  async findByInsumo(id_insumo: number): Promise<Array<IngredientesReceta>> {
     try {
       const prisma = PrismaAdapter.crearConexion();
 
       const ingredientesRecetadb = await prisma.ingredientes_receta.findMany({
         where: {
-          idInsumo: idInsumo,
+          id_insumo: id_insumo,
         },
         orderBy: {
           idReceta: "asc",
@@ -208,7 +208,7 @@ export class IngredientesRecetaDatasourceImplPrisma
             id: ingredientesRecetadb.id,
             idReceta: ingredientesRecetadb.idReceta,
             cantidad: ingredientesRecetadb.cantidad,
-            idInsumo: ingredientesRecetadb.idInsumo,
+            id_insumo: ingredientesRecetadb.id_insumo,
           })
       );
 
@@ -238,7 +238,7 @@ export class IngredientesRecetaDatasourceImplPrisma
           (ingrediente) => ({
             idReceta: recetadb.id,
             cantidad: ingrediente.cantidad,
-            idInsumo: ingrediente.idInsumo,
+            id_insumo: ingrediente.id_insumo,
           })
         );
 

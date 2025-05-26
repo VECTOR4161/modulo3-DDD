@@ -1,17 +1,17 @@
 import { InsumoRepository, UpdateInsumoDto } from "../..";
 
 interface UpdateInsumoUseCase {
-  execute(idInsumo: number, updateInsumoDto: UpdateInsumoDto): Promise<void>;
+  execute(id_insumo: number, updateInsumoDto: UpdateInsumoDto): Promise<void>;
 }
 
 export class ActualizarInsumo implements UpdateInsumoUseCase {
   constructor(private readonly insumoRepository: InsumoRepository) {}
 
   async execute(
-    idInsumo: number,
+    id_insumo: number,
     updateInsumoDto: UpdateInsumoDto
   ): Promise<void> {
-    await this.insumoRepository.update(idInsumo, updateInsumoDto);
+    await this.insumoRepository.update(id_insumo, updateInsumoDto);
     return;
   }
 }

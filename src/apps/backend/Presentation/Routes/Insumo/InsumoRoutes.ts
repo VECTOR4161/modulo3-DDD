@@ -22,10 +22,6 @@ export class InsumoRoutes {
     router.put("/:id", insumoController.updateInsumo);
     router.get("/", insumoController.getInsumos);
     router.get("/disponibles", insumoController.getInsumosDisponibles);
-    router.get(
-      "/proveedor/:idProveedor",
-      insumoController.getInsumosPorProveedor
-    );
     router.get("/:id", insumoController.getInsumo);
     router.delete("/:id", insumoController.deleteInsumo);
 

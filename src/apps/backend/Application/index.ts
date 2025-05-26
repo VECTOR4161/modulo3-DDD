@@ -87,7 +87,6 @@ export * from './UseCases/Insumo/ActualizarInsumo'
 export * from './UseCases/Insumo/ObtenerInsumo'
 export * from './UseCases/Insumo/ObtenerInsumos'
 export * from './UseCases/Insumo/ObtenerInsumosDisponibles'
-export * from './UseCases/Insumo/ObtenerInsumosPorProveedor'
 export * from './UseCases/Insumo/EliminarInsumo'
 
 //? RECETA

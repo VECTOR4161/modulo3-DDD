@@ -37,7 +37,4 @@ export class InsumoRepositoryImpl implements InsumoRepository {
     return this.insumoDatasource.findAvailable();
   }
 
-  findByProveedor(idProveedor: number): Promise<Array<Insumo>> {
-    return this.insumoDatasource.findByProveedor(idProveedor);
-  }
 }

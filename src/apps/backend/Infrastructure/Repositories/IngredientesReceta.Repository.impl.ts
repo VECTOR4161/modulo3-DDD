@@ -46,8 +46,8 @@ export class IngredientesRecetaRepositoryImpl
     return this.ingredientesRecetaDatasource.findByReceta(idReceta);
   }
 
-  findByInsumo(idInsumo: number): Promise<Array<IngredientesReceta>> {
-    return this.ingredientesRecetaDatasource.findByInsumo(idInsumo);
+  findByInsumo(id_insumo: number): Promise<Array<IngredientesReceta>> {
+    return this.ingredientesRecetaDatasource.findByInsumo(id_insumo);
   }
 
   saveRecetaCompleta(

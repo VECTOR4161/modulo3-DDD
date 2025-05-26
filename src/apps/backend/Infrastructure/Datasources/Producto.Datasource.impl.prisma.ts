@@ -115,9 +115,7 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
       const prisma = PrismaAdapter.crearConexion();
 
       const productosdb = await prisma.producto.findMany({
-        where: {
-          borrado: false,
-        },
+
         orderBy: {
           nombre: "asc",
         },
@@ -166,10 +164,8 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
       const productosdb = await prisma.producto.findMany({
         where: {
           nombre: {
-            contains: nombre,
-            mode: "insensitive",
+            contains: nombre
           },
-          borrado: false,
         },
         orderBy: {
           nombre: "asc",
@@ -204,8 +200,7 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
         where: {
           stock: {
             gt: 0,
-          },
-          borrado: false,
+          }
         },
         orderBy: {
           nombre: "asc",

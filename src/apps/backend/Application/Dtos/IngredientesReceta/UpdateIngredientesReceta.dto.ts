@@ -2,13 +2,13 @@ export class UpdateIngredientesRecetaDto {
   private constructor(
     public idReceta?: number,
     public cantidad?: number,
-    public idInsumo?: number
+    public id_insumo?: number
   ) {}
 
   static create(object: {
     [key: string]: any;
   }): [string?, UpdateIngredientesRecetaDto?] {
-    let { idReceta, cantidad, idInsumo } = object;
+    let { idReceta, cantidad, id_insumo } = object;
 
     if (idReceta !== undefined) {
       if (typeof idReceta !== "number")
@@ -26,16 +26,16 @@ export class UpdateIngredientesRecetaDto {
         return ["La cantidad debe ser mayor a cero", undefined];
     }
 
-    if (idInsumo !== undefined) {
-      if (typeof idInsumo !== "number")
+    if (id_insumo !== undefined) {
+      if (typeof id_insumo !== "number")
         return ["El ID del insumo debe ser numérico", undefined];
-      if (!Number.isInteger(idInsumo))
+      if (!Number.isInteger(id_insumo))
         return ["El ID del insumo debe ser un número entero", undefined];
     }
 
     return [
       undefined,
-      new UpdateIngredientesRecetaDto(idReceta, cantidad, idInsumo),
+      new UpdateIngredientesRecetaDto(idReceta, cantidad, id_insumo),
     ];
   }
 }

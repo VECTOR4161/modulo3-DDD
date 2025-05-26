@@ -27,7 +27,7 @@ export class CrearIngredientesReceta implements CrearIngredientesRecetaUseCase {
     await this.commandPublisher.publish("ingredientes.receta.creado", {
       ingredientesRecetaId: ingredientesReceta.id.value,
       idReceta: ingredientesReceta.idReceta.value,
-      idInsumo: ingredientesReceta.idInsumo.value,
+      id_insumo: ingredientesReceta.id_insumo.value,
       cantidad: ingredientesReceta.cantidad.value,
     });
 

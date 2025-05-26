@@ -17,7 +17,7 @@ export abstract class IngredientesRecetaDatasource {
   abstract getAll(): Promise<Array<IngredientesReceta>>;
   abstract deleteById(id: number): Promise<void>;
   abstract findByReceta(idReceta: number): Promise<Array<IngredientesReceta>>;
-  abstract findByInsumo(idInsumo: number): Promise<Array<IngredientesReceta>>;
+  abstract findByInsumo(id_insumo: number): Promise<Array<IngredientesReceta>>;
   abstract saveRecetaCompleta(
     createRecetaCompleta: CreateRecetaCompletaDto
   ): Promise<void>;

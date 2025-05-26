@@ -4,7 +4,7 @@ type IngredientesRecetaCreadoDomainEventAttributes = {
     readonly id: number;
     readonly idReceta: number;
     readonly cantidad: number;
-    readonly idInsumo: number;
+    readonly id_insumo: number;
 };
 
 export class IngredientesRecetaCreadoDomainEvent extends DomainEvent {
@@ -13,7 +13,7 @@ export class IngredientesRecetaCreadoDomainEvent extends DomainEvent {
     readonly id: number;
     readonly idReceta: number;
     readonly cantidad: number;
-    readonly idInsumo: number;
+    readonly id_insumo: number;
 
     constructor({
         aggregateId,
@@ -22,7 +22,7 @@ export class IngredientesRecetaCreadoDomainEvent extends DomainEvent {
         id,
         idReceta,
         cantidad,
-        idInsumo
+        id_insumo
     }: {
         aggregateId: string;
         eventId?: string;
@@ -30,22 +30,22 @@ export class IngredientesRecetaCreadoDomainEvent extends DomainEvent {
         id: number;
         idReceta: number;
         cantidad: number;
-        idInsumo: number;
+        id_insumo: number;
     }) {
         super({ eventName: IngredientesRecetaCreadoDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn });
         this.id = id;
         this.idReceta = idReceta;
         this.cantidad = cantidad;
-        this.idInsumo = idInsumo;
+        this.id_insumo = id_insumo;
     }
 
     toPrimitives(): IngredientesRecetaCreadoDomainEventAttributes {
-        const { id, idReceta, cantidad, idInsumo } = this;
+        const { id, idReceta, cantidad, id_insumo } = this;
         return {
             id,
             idReceta,
             cantidad,
-            idInsumo
+            id_insumo
         };
     }
 
@@ -63,7 +63,7 @@ export class IngredientesRecetaCreadoDomainEvent extends DomainEvent {
             id: attributes.id,
             idReceta: attributes.idReceta,
             cantidad: attributes.cantidad,
-            idInsumo: attributes.idInsumo
+            id_insumo: attributes.id_insumo
         });
     }
 }
