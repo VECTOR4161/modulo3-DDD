@@ -18,7 +18,7 @@ export class ProveedorRoutes{
         //* rutas operaciones crud
         router.post('/save', saveProveedorController.saveProveedor)
         router.get('/', getProveedoresController.getProveedores)
-        router.get('/:id', getProveedoresController.getProveedorById)
+        //* router.get('/:id', getProveedoresController.getProveedorById)
         
         return router
     }

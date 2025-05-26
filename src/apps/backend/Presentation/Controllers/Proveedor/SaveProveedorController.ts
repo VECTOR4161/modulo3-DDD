@@ -20,7 +20,7 @@ export class SaveProveedorController{
     }
 
     //* metodo del controlador
-    saveProveedor = async (req: Request, res: Response) => {
+    saveProveedor = async (req: Request, res: Response): Promise<void> => {
 
         //* Validar la entrada de datos  al servidor usando el dto
         const [error, createProveedorDto] = CreateProveedorDto.create( req.body )

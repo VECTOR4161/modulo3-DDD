@@ -18,7 +18,7 @@ export class EntidadRoutes{
         //* ruta del controlador
         router.post('/save', saveEntidadController.saveEntidad)
         router.get('/', getEntidadesController.getEntidades)
-        router.get('/:id', getEntidadesController.getEntidadById)
+        //* router.get('/:id', getEntidadesController.getEntidadById)
         return router
     }
 }
