@@ -32,6 +32,12 @@ export * from './ValueObjects/Producto/ProductoPrecio'
 export * from './ValueObjects/Producto/ProductoStock'
 export * from './ValueObjects/Producto/ProductoBorrado'
 
+//? INSUMO
+export * from './ValueObjects/Insumo/InsumoId'
+export * from './ValueObjects/Insumo/InsumoNombre'
+export * from './ValueObjects/Insumo/InsumoPrecio'
+export * from './ValueObjects/Insumo/InsumoUnidades'
+export * from './ValueObjects/Insumo/InsumoIdProveedor'
 
 //* EVENTS
 //? PERSONA
@@ -40,10 +46,12 @@ export * from './Events/Persona/personaCreated'
 export * from './Events/Cliente/clienteCreated'
 //? PRODUCTO
 export * from './Events/Producto/productoCreated'
+//? INSUMO
+export * from './Events/Insumo/insumoCreated'
 
 //* AGREGADOS
 export * from './Aggregates/persona'
 export * from './Aggregates/cliente'
 export * from './Aggregates/usuario'
 export * from './Aggregates/producto'
-
+export * from './Aggregates/insumo'
