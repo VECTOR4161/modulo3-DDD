@@ -8,6 +8,9 @@ export * from './Dtos/Cliente/UpdateCliente.dto'
 //? USUARIO
 export * from './Dtos/Usuario/CreateUsuario.dto'
 export * from './Dtos/Usuario/UpdateUsuario.dto'
+//? PRODUCTO
+export * from './Dtos/Producto/CreateProducto.dto'
+export * from './Dtos/Producto/UpdateProducto.dto'
 
 //* MESSAGING 
 export * from './Interfaces/messaging/CommandPublisher'
@@ -17,12 +20,13 @@ export * from './Interfaces/messaging/CommandSubscriber'
 export * from './Interfaces/Repositories/PersonaRepository'
 export * from './Interfaces/Repositories/ClienteRepository'
 export * from './Interfaces/Repositories/UsuarioRepository'
-
+export * from './Interfaces/Repositories/ProductoRepository'
 
 //* DATASOURCES
 export * from './Interfaces/Datasources/PersonaDatasource'
 export * from './Interfaces/Datasources/ClienteDatasource'
 export * from './Interfaces//Datasources/UsuarioDatasource'
+export * from './Interfaces/Datasources/ProductoDatasource'
 
 //* COMMANDS
 export * from './Commands/Persona/crearPersonaCommand'
@@ -46,4 +50,10 @@ export * from './UseCases/Usuario/Actualizarusuario'
 export * from './UseCases/Usuario/ObtenerUsuario'
 export * from './UseCases/Usuario/ObtenerUsuarios'
 export * from './UseCases/Usuario/EliminarUsuario'
-
+//? PRODUCTO
+export * from './UseCases/Producto/CrearProducto'
+export * from './UseCases/Producto/ActualizarProducto'
+export * from './UseCases/Producto/ObtenerProducto'
+export * from './UseCases/Producto/ObtenerProductos'
+export * from './UseCases/Producto/EliminarProducto'
+export * from './UseCases/Producto/ObtenerProductosDisponibles'
