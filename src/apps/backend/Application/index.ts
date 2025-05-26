@@ -64,3 +64,11 @@ export * from './UseCases/Usuario/ObtenerUsuario'
 export * from './UseCases/Usuario/ObtenerUsuarios'
 export * from './UseCases/Usuario/EliminarUsuario'
 
+//? PROVEEDOR
+export * from './UseCases/CrearProveedor'
+export * from './UseCases/ObtenerProveedores'
+export * from './UseCases/ObtenerProveedorPorId'
+//? ENTIDAD
+export * from './UseCases/CrearEntidad'
+export * from './UseCases/ObtenerEntidades'
+export * from './UseCases/ObtenerEntidadPorId'

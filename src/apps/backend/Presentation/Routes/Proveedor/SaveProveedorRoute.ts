@@ -1,9 +1,10 @@
 import { Router } from "express"
 import { ProveedorDatasourceImplPrisma, ProveedorRepositoryImpl } from "../../../Infrastructure"
 import { SaveProveedorController } from "../.."
+import { GetProveedoresController } from "../../Controllers/Proveedor/GetProveedoresController"
 
-//* clase que gestiona la ruta para guardar un proveedor
-export class SaveProveedorRoute{
+//* clase que gestiona todas las rutas del proveedor
+export class ProveedorRoutes{
     static get routes(): Router{
 
         const router = Router()
@@ -12,9 +13,13 @@ export class SaveProveedorRoute{
         const proveedorDatasource = new ProveedorDatasourceImplPrisma()
         const proveedorRepository = new ProveedorRepositoryImpl( proveedorDatasource )
         const saveProveedorController = new SaveProveedorController( proveedorRepository )
+        const getProveedoresController = new GetProveedoresController( proveedorRepository )
 
-        //* ruta del controlador
+        //* rutas operaciones crud
         router.post('/save', saveProveedorController.saveProveedor)
+        router.get('/', getProveedoresController.getProveedores)
+        router.get('/:id', getProveedoresController.getProveedorById)
+        
         return router
     }
 }
