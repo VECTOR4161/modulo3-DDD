@@ -23,38 +23,24 @@ export class ProductoController {
     if (error instanceof CustomError) {
       return res.status(error.statusCode).json({ error: error.message });
     }
-
     console.error("Unexpected error:", error);
     return res.status(500).json({ error: "Error interno del servidor" });
   };
 
-  saveProducto = async (req: Request, res: Response) => {
+  saveProducto = async (req: Request, res: Response): Promise<void> => {
     const [error, createProductoDto] = CreateProductoDto.create(req.body);
-    if (error) {
-      return res.status(400).json({ error });
-    }
 
     new CrearProducto(this.productoRepository, this.commandPublisher)
       .execute(createProductoDto!)
-      .then((data) =>
-        res.status(201).json({
-          message: "Producto creado exitosamente",
-          data,
-        })
-      )
+      .then((data) => res.json({ data }))
+
       .catch((error) => this.handleError(error, res));
   };
 
-  updateProducto = async (req: Request, res: Response) => {
+  updateProducto = async (req: Request, res: Response): Promise<void> => {
     const [error, updateProductoDto] = UpdateProductoDto.create(req.body);
-    if (error) {
-      return res.status(400).json({ error });
-    }
 
     const id = Number(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ error: "ID de producto inválido" });
-    }
 
     new ActualizarProducto(this.productoRepository)
       .execute(id, updateProductoDto!)
@@ -67,11 +53,8 @@ export class ProductoController {
       .catch((error) => this.handleError(error, res));
   };
 
-  getProducto = async (req: Request, res: Response) => {
+  getProducto = async (req: Request, res: Response): Promise<void> => {
     const id = Number(req.params.id);
-    if (isNaN(id)) {
-      return res.status(400).json({ error: "ID de producto inválido" });
-    }
 
     new ObtenerProducto(this.productoRepository)
       .execute(id)
@@ -83,7 +66,7 @@ export class ProductoController {
       .catch((error) => this.handleError(error, res));
   };
 
-  getProductos = async (req: Request, res: Response) => {
+  getProductos = async (req: Request, res: Response): Promise<void> => {
     new ObtenerProductos(this.productoRepository)
       .execute()
       .then((data) =>
@@ -95,7 +78,10 @@ export class ProductoController {
       .catch((error) => this.handleError(error, res));
   };
 
-  getProductosDisponibles = async (req: Request, res: Response) => {
+  getProductosDisponibles = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     new ObtenerProductosDisponibles(this.productoRepository)
       .execute()
       .then((data) =>
@@ -107,10 +93,11 @@ export class ProductoController {
       .catch((error) => this.handleError(error, res));
   };
 
-  deleteProducto = async (req: Request, res: Response) => {
+  deleteProducto = async (req: Request, res: Response): Promise<void> => {
     const id = Number(req.params.id);
     if (isNaN(id)) {
-      return res.status(400).json({ error: "ID de producto inválido" });
+      res.status(400).json({ error: "ID de producto inválido" });
+      return;
     }
 
     new EliminarProducto(this.productoRepository)
