@@ -10,8 +10,8 @@ export class ProveedorRepositoryImpl implements ProveedorRepository{
     save(crearProveedor: CreateProveedorDto): Promise<void> {
         return this.ProveedorDatasource.save(crearProveedor)
     }
-    update(actualizarProveedor: UpdateProveedorDto): Promise<Proveedor> {
-        return this.ProveedorDatasource.update(actualizarProveedor)
+    update(actualizarProveedor: UpdateProveedorDto, id: number): Promise<Proveedor> {
+        return this.ProveedorDatasource.update(actualizarProveedor, id)
     }
     getById(id: number): Promise<Proveedor> {
         return this.ProveedorDatasource.getById(id)

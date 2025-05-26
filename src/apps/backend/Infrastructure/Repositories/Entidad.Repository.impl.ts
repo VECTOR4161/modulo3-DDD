@@ -10,8 +10,8 @@ export class EntidadRepositoryImpl implements EntidadRepository{
     save(crearEntidad: CreateEntidadDto): Promise<void> {
         return this.EntidadDatasource.save(crearEntidad)
     }
-    update(actualizarEntidad: UpdateEntidadDto): Promise<Entidad> {
-        return this.EntidadDatasource.update(actualizarEntidad)
+    update(actualizarEntidad: UpdateEntidadDto, id: number): Promise<Entidad> {
+        return this.EntidadDatasource.update(actualizarEntidad, id)
     }
     getById(id: number): Promise<Entidad> {
         return this.EntidadDatasource.getById(id)
