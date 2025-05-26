@@ -1,22 +1,22 @@
 export class CreateRecetaCompletaDto {
   private constructor(
-    public idProductoObtenido: number,
+    public id_producto_obtenido: number,
     public ingredientes: Array<{ idInsumo: number; cantidad: number }>
   ) {}
 
   static create(object: {
     [key: string]: any;
   }): [string?, CreateRecetaCompletaDto?] {
-    let { idProductoObtenido, ingredientes } = object;
+    let { id_producto_obtenido, ingredientes } = object;
 
-    if (!idProductoObtenido)
+    if (!id_producto_obtenido)
       return ["El ID del producto obtenido es requerido", undefined];
     if (!ingredientes || !Array.isArray(ingredientes))
       return ["Los ingredientes deben ser un array", undefined];
     if (ingredientes.length === 0)
       return ["Debe incluir al menos un ingrediente", undefined];
 
-    if (!Number.isInteger(idProductoObtenido))
+    if (!Number.isInteger(id_producto_obtenido))
       return ["El ID del producto debe ser un número entero", undefined];
 
     for (let i = 0; i < ingredientes.length; i++) {
@@ -44,7 +44,7 @@ export class CreateRecetaCompletaDto {
 
     return [
       undefined,
-      new CreateRecetaCompletaDto(idProductoObtenido, ingredientes),
+      new CreateRecetaCompletaDto(id_producto_obtenido, ingredientes),
     ];
   }
 }

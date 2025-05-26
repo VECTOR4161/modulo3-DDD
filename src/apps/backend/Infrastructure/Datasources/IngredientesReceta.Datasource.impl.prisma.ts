@@ -122,7 +122,7 @@ export class IngredientesRecetaDatasourceImplPrisma
       });
 
       const ingredientesReceta = ingredientesRecetadb.map(
-        (ingredientesRecetadb:any) =>
+        (ingredientesRecetadb) =>
           IngredientesReceta.fromPrimitives({
             id: ingredientesRecetadb.id,
             idReceta: ingredientesRecetadb.idReceta,
@@ -230,7 +230,7 @@ export class IngredientesRecetaDatasourceImplPrisma
       await prisma.$transaction(async (tx: any) => {
         const recetadb = await tx.recetas.create({
           data: {
-            idProductoObtenido: createRecetaCompleta.idProductoObtenido,
+            id_producto_obtenido: createRecetaCompleta.id_producto_obtenido,
           },
         });
 

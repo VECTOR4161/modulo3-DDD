@@ -14,13 +14,13 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
 
       const recetadb = await prisma.recetas.create({
         data: {
-          idProductoObtenido: crearReceta.idProductoObtenido,
+          id_producto_obtenido: crearReceta.id_producto_obtenido,
         },
       });
 
       const receta = Receta.create(
         new RecetaId(recetadb.id),
-        new RecetaIdProductoObtenido(recetadb.idProductoObtenido)
+        new RecetaIdProductoObtenido(recetadb.id_producto_obtenido)
       );
 
       return receta;
@@ -75,7 +75,7 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
 
       const receta = Receta.fromPrimitives({
         id: recetadb.id,
-        idProductoObtenido: recetadb.idProductoObtenido,
+        id_producto_obtenido: recetadb.id_producto_obtenido,
       });
 
       return receta;
@@ -100,7 +100,7 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
       const recetas = recetasdb.map((recetadb:any) =>
         Receta.fromPrimitives({
           id: recetadb.id,
-          idProductoObtenido: recetadb.idProductoObtenido,
+          id_producto_obtenido: recetadb.id_producto_obtenido,
         })
       );
 
@@ -134,7 +134,7 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
 
       const recetasdb = await prisma.recetas.findMany({
         where: {
-          idProductoObtenido: idProducto,
+          id_producto_obtenido: idProducto,
         },
         orderBy: {
           id: "asc",
@@ -144,7 +144,7 @@ export class RecetaDatasourceImplPrisma implements RecetaDatasource {
       const recetas = recetasdb.map((recetadb:any) =>
         Receta.fromPrimitives({
           id: recetadb.id,
-          idProductoObtenido: recetadb.idProductoObtenido,
+          id_producto_obtenido: recetadb.id_producto_obtenido,
         })
       );
 

@@ -21,7 +21,7 @@ export class CrearRecetaCompleta implements CrearRecetaCompletaUseCase {
 
     await this.commandPublisher.connect();
     await this.commandPublisher.publish("receta.completa.creada", {
-      idProductoObtenido: createRecetaCompleta.idProductoObtenido,
+      id_producto_obtenido: createRecetaCompleta.id_producto_obtenido,
       ingredientes: createRecetaCompleta.ingredientes,
     });
 

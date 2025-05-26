@@ -2,27 +2,27 @@ import { DomainEvent } from "../../DomainEvent";
 
 type RecetaCreadaDomainEventAttributes = {
   readonly id: number;
-  readonly idProductoObtenido: number;
+  readonly id_producto_obtenido: number;
 };
 
 export class RecetaCreadaDomainEvent extends DomainEvent {
   static readonly EVENT_NAME = "receta.creada";
 
   readonly id: number;
-  readonly idProductoObtenido: number;
+  readonly id_producto_obtenido: number;
 
   constructor({
     aggregateId,
     eventId,
     occurredOn,
     id,
-    idProductoObtenido,
+    id_producto_obtenido,
   }: {
     aggregateId: string;
     eventId?: string;
     occurredOn?: Date;
     id: number;
-    idProductoObtenido: number;
+    id_producto_obtenido: number;
   }) {
     super({
       eventName: RecetaCreadaDomainEvent.EVENT_NAME,
@@ -31,14 +31,14 @@ export class RecetaCreadaDomainEvent extends DomainEvent {
       occurredOn,
     });
     this.id = id;
-    this.idProductoObtenido = idProductoObtenido;
+    this.id_producto_obtenido = id_producto_obtenido;
   }
 
   toPrimitives(): RecetaCreadaDomainEventAttributes {
-    const { id, idProductoObtenido } = this;
+    const { id, id_producto_obtenido } = this;
     return {
       id,
-      idProductoObtenido,
+      id_producto_obtenido,
     };
   }
 
@@ -54,7 +54,7 @@ export class RecetaCreadaDomainEvent extends DomainEvent {
       eventId,
       occurredOn,
       id: attributes.id,
-      idProductoObtenido: attributes.idProductoObtenido,
+      id_producto_obtenido: attributes.id_producto_obtenido,
     });
   }
 }

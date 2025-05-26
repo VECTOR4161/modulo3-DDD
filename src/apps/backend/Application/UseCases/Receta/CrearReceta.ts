@@ -16,7 +16,7 @@ export class CrearReceta implements CrearRecetaUseCase {
     await this.commandPublisher.connect();
     await this.commandPublisher.publish("receta.creada", {
       recetaId: receta.id.value,
-      idProductoObtenido: receta.idProductoObtenido.value,
+      id_producto_obtenido: receta.id_producto_obtenido.value,
     });
 
     return;

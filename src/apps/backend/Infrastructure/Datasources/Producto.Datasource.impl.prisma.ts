@@ -123,7 +123,7 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
         },
       });
 
-      const productos = productosdb.map((productodb) =>
+      const productos = productosdb.map((productodb:any) =>
         Producto.fromPrimitives({
           id: productodb.id,
           nombre: productodb.nombre,
@@ -176,7 +176,7 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
         },
       });
 
-      const productos = productosdb.map((productodb) =>
+      const productos = productosdb.map((productodb:any) =>
         Producto.fromPrimitives({
           id: productodb.id,
           nombre: productodb.nombre,
@@ -212,7 +212,7 @@ export class ProductoDatasourceImplPrisma implements ProductoDatasource {
         },
       });
 
-      const productos = productosdb.map((productodb) =>
+      const productos = productosdb.map((productodb:any) =>
         Producto.fromPrimitives({
           id: productodb.id,
           nombre: productodb.nombre,
