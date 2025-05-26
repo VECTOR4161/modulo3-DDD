@@ -1,7 +1,7 @@
 import { CreateEntidadDto, UpdateEntidadDto } from "../..";
 import { Entidad } from "../../../Core";
 
-//* LOGICA DEL REPOSITORIO QUE SE CONECTARA CON EL DATASOURCE
+//* logica del repositorio
 export abstract class EntidadRepository{
     abstract save(crearEntidad: CreateEntidadDto): Promise<void>
     abstract update(actualizarEntidad: UpdateEntidadDto): Promise<Entidad>

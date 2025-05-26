@@ -1,7 +1,7 @@
 import { CreateProveedorDto, UpdateProveedorDto } from "../..";
 import { Proveedor } from "../../../Core";
 
-//* LOGICA DEL REPOSITORIO QUE SE CONECTARA CON EL DATASOURCE
+//* logica del repositorio
 export abstract class ProveedorRepository{
     abstract save(crearProveedor: CreateProveedorDto): Promise<void>
     abstract update(actualizarProveedor: UpdateProveedorDto): Promise<Proveedor>

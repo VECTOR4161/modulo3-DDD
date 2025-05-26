@@ -1,4 +1,4 @@
-//* CLASE DTO ENCARGADA DE ESTANDARIZAR LOS CONTENIDOS QUE LLEGAN DESDE EL FRONTEND
+//* Recibir y sanear contenido que llega desde el frontend
 export class CreateEntidadDto{
     private constructor(
         public idProveedor: number,
@@ -9,7 +9,6 @@ export class CreateEntidadDto{
         public borrado: boolean = false
     ){}
 
-    //* METODO ESTATICO USADO PARA LA CREACION DEL DTO
     static create( object: {[key: string]: any}): [string?, CreateEntidadDto?]{
         let {
             idProveedor,
@@ -20,7 +19,7 @@ export class CreateEntidadDto{
             borrado = false
         } = object
 
-        //* VERIFICACION DE LOS CAMPOS DIRECTAMENTE DESDE EL REQUEST
+        //* verificacion
         if( !idProveedor ) return ['El ID de proveedor es requerido', undefined]
         if( typeof idProveedor !== 'number' ) return ['El ID de proveedor debe ser un número', undefined]
         if( !nombre ) return ['El nombre es requerido', undefined]

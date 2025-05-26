@@ -9,6 +9,14 @@ export * from './Dtos/Cliente/UpdateCliente.dto'
 export * from './Dtos/Usuario/CreateUsuario.dto'
 export * from './Dtos/Usuario/UpdateUsuario.dto'
 
+//? proveedor
+export * from './Dtos/Proveedor/CreateProveedor.dto'
+export * from './Dtos/Proveedor/UpdateProveedor.dto'
+//? entidad
+export * from './Dtos/Entidad/CreateEntidad.dto'
+export * from './Dtos/Entidad/UpdateEntidad.dto'
+
+
 //* MESSAGING 
 export * from './Interfaces/messaging/CommandPublisher'
 export * from './Interfaces/messaging/CommandSubscriber'
@@ -18,14 +26,23 @@ export * from './Interfaces/Repositories/PersonaRepository'
 export * from './Interfaces/Repositories/ClienteRepository'
 export * from './Interfaces/Repositories/UsuarioRepository'
 
+export * from './Interfaces/Repositories/ProveedorRepository'
+export * from './Interfaces/Repositories/EntidadRepository'
+
 
 //* DATASOURCES
 export * from './Interfaces/Datasources/PersonaDatasource'
 export * from './Interfaces/Datasources/ClienteDatasource'
 export * from './Interfaces//Datasources/UsuarioDatasource'
 
+export * from './Interfaces/Datasources/ProveedorDatasource'
+export * from './Interfaces/Datasources/EntidadDatasource'
+
 //* COMMANDS
 export * from './Commands/Persona/crearPersonaCommand'
+
+export * from './Commands/Proveedor/crearProveedorCommand'
+export * from './Commands/Entidad/crearEntidadCommand'
 
 //* CASOS DE USO
 //? PERSONA

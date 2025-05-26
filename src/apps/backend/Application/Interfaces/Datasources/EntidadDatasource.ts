@@ -1,7 +1,7 @@
 import { CreateEntidadDto, UpdateEntidadDto } from "../..";
 import { Entidad } from "../../../Core";
 
-//* LOGICA DE LAS OPERACIONES DE LA BASE DE DATOS
+//* Logica de las operaciones de la base de datos
 export abstract class EntidadDatasource{
     abstract save(crearEntidad: CreateEntidadDto): Promise<void>
     abstract update(actualizarEntidad: UpdateEntidadDto): Promise<Entidad>

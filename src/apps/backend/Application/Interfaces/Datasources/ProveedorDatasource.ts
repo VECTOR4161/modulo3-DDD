@@ -1,7 +1,7 @@
 import { CreateProveedorDto, UpdateProveedorDto } from "../..";
 import { Proveedor } from "../../../Core";
 
-//* LOGICA DE LAS OPERACIONES DE LA BASE DE DATOS
+//* Operaciones de la base de datos
 export abstract class ProveedorDatasource{
     abstract save(crearProveedor: CreateProveedorDto): Promise<void>
     abstract update(actualizarProveedor: UpdateProveedorDto): Promise<Proveedor>

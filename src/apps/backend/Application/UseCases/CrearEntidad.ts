@@ -1,27 +1,26 @@
 import { CreateEntidadDto, EntidadRepository } from "..";
 import { RabbitMQPublisher } from "../../Infrastructure";
 
-//* INTERFAZ DEL CASO DE USO
+//* interfaz del caso de uso
 interface CrearEntidadUseCase{
     execute(createEntidadDto: CreateEntidadDto): Promise<void>
 }
 
-//* CASO DE USO CREAR ENTIDAD ENCARGADO DE GESTIONAR LA LOGICA DE APLICACION Y DE NOTIFICACION DE EVENTOS
+//* caso de uso crear entidad
 export class CrearEntidad implements CrearEntidadUseCase{
     constructor(
         private readonly entidadRepository: EntidadRepository
     ){}
         
     async execute(createEntidadDto: CreateEntidadDto): Promise<void> {
-        //* USAR EL REPOSITORIO
+        //* Uusar el repositorio
         await this.entidadRepository.save(createEntidadDto);
 
-        //* USAR EL COMMANDBUS
+        //* usar el commandbus
         const publisher = new RabbitMQPublisher();
         await publisher.connect();
         publisher.publish('entidad_creada', 'Entidad creada desde caso de uso')
 
-        //* REGRESAR EL RESULTADO DEL CASO DE USO
         return 
     }
 }
